@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './modules/auth/services/auth.guard';
-import { AddEcComponent } from './pages/add-ec/add-ec.component';
+import { AccreditationComponent } from './pages/accreditation/accreditation.component';
 
 export const routes: Routes = [
-  { path: 'ec', component: AddEcComponent },
+  { path: 'ec', component: AccreditationComponent },
   {
     path: 'auth',
     loadChildren: () =>

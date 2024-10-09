@@ -1,0 +1,130 @@
+<div class="d-flex flex-row-fluid flex-center bg-body rounded">
+  <form
+    [formGroup]="createAccountForm"
+    (ngSubmit)="onSubmit()"
+    novalidate
+    id="kt_create_account_form"
+    class="py-20 w-100 w-xl-700px px-9"
+  >
+    <div class="current">
+      <div class="pb-10 pb-lg-15">
+        <h2 class="fw-bolder text-dark">Account Info</h2>
+        <div class="text-gray-400 fw-bold fs-6">
+          If you need more info, please check out
+          <a href="#" class="link-primary fw-bolder"> Help Page</a>.
+        </div>
+      </div>
+
+      <!-- Account Plan Radios -->
+      <label class="d-flex align-items-center form-label mb-5">
+        Select Account Plan<i
+          ngbTooltip="Monthly billing will be based on your account plan"
+          class="fas fa-exclamation-circle ms-2 fs-7"
+        ></i>
+      </label>
+      <div class="mb-0">
+        <label class="d-flex flex-stack mb-5 cursor-pointer">
+          <span class="d-flex align-items-center me-2">
+            <span class="fw-bolder text-gray-800 text-hover-primary fs-5"
+              >Quero cadastrar um CPF</span
+            >
+          </span>
+          <span class="form-check form-check-custom form-check-solid">
+            <input
+              formControlName="accountPlan"
+              type="radio"
+              value="1"
+              class="form-check-input"
+            />
+          </span>
+        </label>
+        <label class="d-flex flex-stack mb-5 cursor-pointer">
+          <span class="d-flex align-items-center me-2">
+            <span class="fw-bolder text-gray-800 text-hover-primary fs-5"
+              >Quero cadastrar um CNPJ</span
+            >
+          </span>
+          <span class="form-check form-check-custom form-check-solid">
+            <input
+              formControlName="accountPlan"
+              type="radio"
+              value="2"
+              class="form-check-input"
+            />
+          </span>
+        </label>
+      </div>
+
+      <!-- Revenue Profile Dropdown -->
+      <label class="form-label mb-3 required">Setor de Negócio</label>
+      <select formControlName="businessSector" class="form-control">
+        <option value="" disabled selected>
+          Selecione um setor de negócio
+        </option>
+        <option *ngFor="let sector of businessSectors" [value]="sector.id">
+          {{ sector.name }}
+        </option>
+      </select>
+      <!-- Revenue Profile Dropdown -->
+      <label class="form-label mb-3 required">Perfil de Faturamento</label>
+      <select formControlName="revenueProfile" class="form-control">
+        <option value="" disabled selected>
+          Selecione um perfil de faturamento
+        </option>
+        <option *ngFor="let profile of revenueProfiles" [value]="profile.id">
+          {{ profile.name }}
+        </option>
+      </select>
+      <!-- Auto Cash Flow Dropdown -->
+      <label class="form-label mb-3 required">Antecipação Automática</label>
+      <select formControlName="autoCashFlow" class="form-control">
+        <option value="1">Sim</option>
+        <option value="0">Não</option>
+      </select>
+
+      <!-- CNPJ Input -->
+      <label class="form-label mb-3 required">CNPJ</label>
+      <input
+        formControlName="cnpj"
+        type="text"
+        placeholder="__.___.___/____-__"
+        class="form-control form-control-lg"
+      />
+
+      <!-- CPF Input -->
+      <label class="form-label mb-3 required">CPF</label>
+      <input
+        formControlName="cpf"
+        type="text"
+        placeholder="___.___.___-__"
+        class="form-control form-control-lg"
+      />
+
+      <!-- Monthly Revenue Input -->
+      <label class="form-label mb-3 required">Faturamento Mensal</label>
+      <input
+        formControlName="monthlyRevenue"
+        type="text"
+        placeholder="R$"
+        class="form-control form-control-lg"
+      />
+
+      <!-- Average Ticket Input -->
+      <label class="form-label mb-3 required">Ticket Médio</label>
+      <input
+        formControlName="averageTicket"
+        type="text"
+        placeholder="R$"
+        class="form-control form-control-lg"
+      />
+    </div>
+
+    <!-- Submit Button -->
+    <div class="d-flex flex-stack pt-10">
+      <button type="button" class="btn btn-lg btn-light-primary me-3">
+        Back
+      </button>
+      <button type="submit" class="btn btn-lg btn-primary me-3">Create</button>
+    </div>
+  </form>
+</div>

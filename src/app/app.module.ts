@@ -11,10 +11,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthService } from './modules/auth/services/auth.service';
 import { environment } from 'src/environments/environment';
-// #fake-start#
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { FakeAPIService } from './_fake/fake-api.service';
-import { AddEcComponent } from './pages/add-ec/add-ec.component';
-// #fake-end#
+import { AccreditationComponent } from './pages/accreditation/accreditation.component';
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -26,12 +26,13 @@ function appInitializer(authService: AuthService) {
 }
 
 @NgModule({
-  declarations: [AppComponent, AddEcComponent],
+  declarations: [AppComponent, AccreditationComponent ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot(),
     HttpClientModule,
+    ReactiveFormsModule, 
     ClipboardModule,
     // #fake-start#
     environment.isMockEnabled
