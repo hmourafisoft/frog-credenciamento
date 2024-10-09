@@ -44,9 +44,9 @@ export class AccreditationComponent implements OnInit {
 
   loadBusinessSectors(): void {
     this.businessSectorService.getActiveBusinessSectors().subscribe(
-      (sectors: BusinessSectorDTO[]) => { // Specify the type for sectors
+      (sectors: BusinessSectorDTO[]) => { 
         console.log('Fetched business sectors:', sectors);
-        this.businessSectors = sectors; // Assign fetched sectors to the property
+        this.businessSectors = sectors; 
       },
       (error) => {
         console.error('Error fetching business sectors', error);
@@ -56,10 +56,10 @@ export class AccreditationComponent implements OnInit {
 
   loadRevenueProfiles(): void {
     this.revenueProfileService.getActiveRevenueProfiles().subscribe(
-      (profiles: RevenueProfileDTO[]) => { // Specify the type for profiles
+      (profiles: RevenueProfileDTO[]) => { 
         console.log('Fetched revenue profiles:', profiles);
-        this.revenueProfiles = profiles; // Assign fetched profiles to the property
-        // Optionally set the default value for revenueProfile if needed
+        this.revenueProfiles = profiles; 
+        
         if (profiles.length > 0) {
           this.createAccountForm.get('revenueProfile')?.setValue(profiles[0].id);
         }
@@ -73,18 +73,18 @@ export class AccreditationComponent implements OnInit {
   saveClient(): void {
     if (this.createAccountForm.valid) {
       const clientData: CreateClientDTO = {
-        type: Number(this.createAccountForm.value.accountPlan), // Adjust as needed, ensure it's a number
-        name: this.createAccountForm.value.cpf, // Adjust as needed
-        email: '', // Add appropriate value
-        document: this.createAccountForm.value.cnpj, // Adjust as needed
-        phone: '', // Add appropriate value
-        imageUrl: '', // Add appropriate value
-        businessSector: Number(this.createAccountForm.value.businessSector), // Ensure this is an integer
-        revenueProfile: Number(this.createAccountForm.value.revenueProfile), // Ensure this is an integer
-        monthlyRevenue: Number(this.createAccountForm.value.monthlyRevenue), // Ensure this is an integer
-        averageTicket: Number(this.createAccountForm.value.averageTicket), // Ensure this is an integer
-        autoCashFlow: this.createAccountForm.value.autoCashFlow === true, // Ensure this is a boolean
-        isActive: true // Adjust as needed
+        type: Number(this.createAccountForm.value.accountPlan), 
+        name: this.createAccountForm.value.cpf, 
+        email: '', 
+        document: this.createAccountForm.value.cnpj, 
+        phone: '', 
+        imageUrl: '', 
+        businessSector: Number(this.createAccountForm.value.businessSector), 
+        revenueProfile: Number(this.createAccountForm.value.revenueProfile), 
+        monthlyRevenue: Number(this.createAccountForm.value.monthlyRevenue), 
+        averageTicket: Number(this.createAccountForm.value.averageTicket), 
+        autoCashFlow: this.createAccountForm.value.autoCashFlow === true, 
+        isActive: true 
       };
 
       this.clientService.saveClient(clientData).subscribe(
@@ -100,7 +100,6 @@ export class AccreditationComponent implements OnInit {
     }
   }
 
-  // Handle the form submission
   onSubmit(): void {
     if (this.createAccountForm.valid) {
       console.log('Form Submitted', this.createAccountForm.value);
