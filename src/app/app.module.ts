@@ -15,6 +15,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { FakeAPIService } from './_fake/fake-api.service';
 import { AccreditationComponent } from './pages/accreditation/accreditation.component';
+import { CurrencyPipe } from '@angular/common';
+import { MyPageComponent } from './pages/my-page/my-page.component';  // Adicionar o CurrencyPipe
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -26,7 +28,7 @@ function appInitializer(authService: AuthService) {
 }
 
 @NgModule({
-  declarations: [AppComponent, AccreditationComponent ],
+  declarations: [AppComponent, AccreditationComponent, MyPageComponent  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -34,14 +36,12 @@ function appInitializer(authService: AuthService) {
     HttpClientModule,
     ReactiveFormsModule, 
     ClipboardModule,
-    // #fake-start#
     environment.isMockEnabled
       ? HttpClientInMemoryWebApiModule.forRoot(FakeAPIService, {
           passThruUnknownUrl: true,
           dataEncapsulation: false,
         })
       : [],
-    // #fake-end#
     AppRoutingModule,
     InlineSVGModule.forRoot(),
     NgbModule,
@@ -53,6 +53,7 @@ function appInitializer(authService: AuthService) {
       multi: true,
       deps: [AuthService],
     },
+    CurrencyPipe, 
   ],
   bootstrap: [AppComponent],
 })

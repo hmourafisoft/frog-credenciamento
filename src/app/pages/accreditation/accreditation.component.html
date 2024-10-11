@@ -8,16 +8,15 @@
   >
     <div class="current">
       <div class="pb-10 pb-lg-15">
-        <h2 class="fw-bolder text-dark">Account Info</h2>
+        <h2 class="fw-bolder text-dark">Cliente</h2>
         <div class="text-gray-400 fw-bold fs-6">
-          If you need more info, please check out
-          <a href="#" class="link-primary fw-bolder"> Help Page</a>.
+          Se precisar de maiores informações, clique na
+          <a href="#" class="link-primary fw-bolder"> Página de Ajuda</a>.
         </div>
       </div>
 
-      <!-- Account Plan Radios -->
       <label class="d-flex align-items-center form-label mb-5">
-        Select Account Plan<i
+        Selecione Tipo de Cliente<i
           ngbTooltip="Monthly billing will be based on your account plan"
           class="fas fa-exclamation-circle ms-2 fs-7"
         ></i>
@@ -55,7 +54,6 @@
         </label>
       </div>
 
-      <!-- Revenue Profile Dropdown -->
       <label class="form-label mb-3 required">Setor de Negócio</label>
       <select formControlName="businessSector" class="form-control">
         <option value="" disabled selected>
@@ -65,7 +63,6 @@
           {{ sector.name }}
         </option>
       </select>
-      <!-- Revenue Profile Dropdown -->
       <label class="form-label mb-3 required">Perfil de Faturamento</label>
       <select formControlName="revenueProfile" class="form-control">
         <option value="" disabled selected>
@@ -75,56 +72,58 @@
           {{ profile.name }}
         </option>
       </select>
-      <!-- Auto Cash Flow Dropdown -->
       <label class="form-label mb-3 required">Antecipação Automática</label>
       <select formControlName="autoCashFlow" class="form-control">
         <option value="1">Sim</option>
         <option value="0">Não</option>
       </select>
 
-      <!-- CNPJ Input -->
-      <label class="form-label mb-3 required">CNPJ</label>
-      <input
-        formControlName="cnpj"
-        type="text"
-        placeholder="__.___.___/____-__"
-        class="form-control form-control-lg"
-      />
+      <div *ngIf="createAccountForm.get('accountPlan')?.value === '1'">
+        <label class="form-label mb-3 required">CPF</label>
+        <input
+          formControlName="cpf"
+          type="text"
+          placeholder="___.___.___-__"
+          class="form-control form-control-lg"
+          (input)="onCPFInput($event)"
+        />
+      </div>
 
-      <!-- CPF Input -->
-      <label class="form-label mb-3 required">CPF</label>
-      <input
-        formControlName="cpf"
-        type="text"
-        placeholder="___.___.___-__"
-        class="form-control form-control-lg"
-      />
+      <div *ngIf="createAccountForm.get('accountPlan')?.value === '2'">
+        <label class="form-label mb-3 required">CNPJ</label>
+        <input
+          formControlName="cnpj"
+          type="text"
+          placeholder="__.___.___/____-__"
+          class="form-control form-control-lg"
+          (input)="onCNPJInput($event)"
+        />
+      </div>
 
-      <!-- Monthly Revenue Input -->
       <label class="form-label mb-3 required">Faturamento Mensal</label>
       <input
         formControlName="monthlyRevenue"
         type="text"
         placeholder="R$"
         class="form-control form-control-lg"
+        (input)="formatCurrency('monthlyRevenue')"
       />
 
-      <!-- Average Ticket Input -->
       <label class="form-label mb-3 required">Ticket Médio</label>
       <input
         formControlName="averageTicket"
         type="text"
         placeholder="R$"
         class="form-control form-control-lg"
+        (input)="formatCurrency('averageTicket')"
       />
     </div>
 
-    <!-- Submit Button -->
     <div class="d-flex flex-stack pt-10">
       <button type="button" class="btn btn-lg btn-light-primary me-3">
-        Back
+        Voltar
       </button>
-      <button type="submit" class="btn btn-lg btn-primary me-3">Create</button>
+      <button type="submit" class="btn btn-lg btn-primary me-3">Criar</button>
     </div>
   </form>
 </div>
