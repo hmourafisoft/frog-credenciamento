@@ -16,7 +16,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FakeAPIService } from './_fake/fake-api.service';
 import { AccreditationComponent } from './pages/accreditation/accreditation.component';
 import { CurrencyPipe } from '@angular/common';
-import { MyPageComponent } from './pages/my-page/my-page.component';  // Adicionar o CurrencyPipe
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -28,7 +27,7 @@ function appInitializer(authService: AuthService) {
 }
 
 @NgModule({
-  declarations: [AppComponent, AccreditationComponent, MyPageComponent  ],
+  declarations: [AppComponent, AccreditationComponent  ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
