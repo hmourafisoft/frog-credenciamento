@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './modules/auth/services/auth.guard';
 import { AccreditationComponent } from './pages/accreditation/accreditation.component';
+import { ProductsComponent } from './pages/products/products.component'; // Caminho correto
 
 export const routes: Routes = [
   { path: 'ec', component: AccreditationComponent },
+  { path: 'products', component: ProductsComponent },
   {
     path: 'auth',
     loadChildren: () =>

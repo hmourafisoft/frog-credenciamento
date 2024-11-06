@@ -7,6 +7,13 @@ const Routing: Routes = [
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
   {
+    path: 'credenciamento',
+    loadChildren: () =>
+      import('./credenciamento/credenciamento.module').then(
+        (m) => m.CredenciamentoModule
+      ),
+  },
+  {
     path: 'builder',
     loadChildren: () =>
       import('./builder/builder.module').then((m) => m.BuilderModule),
@@ -45,7 +52,7 @@ const Routing: Routes = [
   },
   {
     path: '',
-    redirectTo: '/dashboard',
+    redirectTo: '/credenciamento',
     pathMatch: 'full',
   },
   {

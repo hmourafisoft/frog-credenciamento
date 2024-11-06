@@ -1,0 +1,64 @@
+.products-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f7f9fc;
+    border-radius: 12px;
+  }
+  
+  /* Estilo para cada opção de produto */
+  .product-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Ícone do produto */
+  .product-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+  }
+  
+  .product-icon img {
+    width: 30px;
+    height: 30px;
+  }
+  
+  /* Detalhes do produto */
+  .product-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .product-name {
+    font-weight: bold;
+    color: #000;
+  }
+  
+  .product-description {
+    font-size: 14px;
+    color: #7d7d7d;
+  }
+  
+  /* Estilo para o input tipo rádio */
+  .product-radio input[type="radio"] {
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* Efeito hover */
+  .product-option:hover {
+    background-color: #e0f7fa;
+  }
+  

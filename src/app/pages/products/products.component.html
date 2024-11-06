@@ -1,0 +1,20 @@
+<div class="products-container">
+    <div class="product-option" *ngFor="let product of products">
+      <div class="product-icon">
+        <img [src]="product.icon" alt="{{ product.name }} icon">
+      </div>
+      <div class="product-details">
+        <span class="product-name">{{ product.name }}</span>
+        <span class="product-description">{{ product.description }}</span>
+      </div>
+      <div class="product-radio">
+        <input
+          type="radio"
+          name="product"
+          [value]="product.id"
+          [(ngModel)]="selectedProduct"
+        />
+      </div>
+    </div>
+  </div>
+  

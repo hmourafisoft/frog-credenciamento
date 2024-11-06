@@ -16,6 +16,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FakeAPIService } from './_fake/fake-api.service';
 import { AccreditationComponent } from './pages/accreditation/accreditation.component';
 import { CurrencyPipe } from '@angular/common';
+import { ProductsComponent } from './pages/products/products.component';
+import { FormsModule } from '@angular/forms';
+
+
+
 
 function appInitializer(authService: AuthService) {
   return () => {
@@ -27,13 +32,14 @@ function appInitializer(authService: AuthService) {
 }
 
 @NgModule({
-  declarations: [AppComponent, AccreditationComponent  ],
+  declarations: [AppComponent, AccreditationComponent, ProductsComponent ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot(),
     HttpClientModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
+    FormsModule, 
     ClipboardModule,
     environment.isMockEnabled
       ? HttpClientInMemoryWebApiModule.forRoot(FakeAPIService, {
