@@ -1,8 +1,10 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { ModalConfig, ModalComponent } from '../../_metronic/partials';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { CredenciamentoService } from './credenciamento.service';
+import { Router } from '@angular/router';
 
 // Dados para a primeira tabela (existente)
 interface UserData {
@@ -10,12 +12,6 @@ interface UserData {
   name: string;
   email: string;
 }
-
-const ELEMENT_DATA: UserData[] = [
-  { id: '1', name: 'Alice', email: 'alice@example.com' },
-  { id: '2', name: 'Bob', email: 'bob@example.com' },
-  // Adicione mais dados para teste
-];
 
 // Dados para a nova tabela "Project Spendings"
 interface ProjectSpending {
@@ -31,19 +27,12 @@ interface ProjectSpending {
   corporateName: string;
 }
 
-const SPENDING_DATA: ProjectSpending[] = [
-  { manager: 'Emma Smith2', date: 'Feb 21, 2024', amount: '$487.00', status: 'Rejected', code: '001', cnpjCpf: '123456789', company: 'Company A', franchise: 'Franchise A', tradeName: 'Trade A', corporateName: 'Corp A' },
-  { manager: 'Melody Macy', date: 'Oct 25, 2024', amount: '$816.00', status: 'Rejected', code: '002', cnpjCpf: '987654321', company: 'Company B', franchise: 'Franchise B', tradeName: 'Trade B', corporateName: 'Corp B' },
-  { manager: 'Max Smith', date: 'Apr 15, 2024', amount: '$707.00', status: 'Approved', code: '003', cnpjCpf: '456123789', company: 'Company C', franchise: 'Franchise C', tradeName: 'Trade C', corporateName: 'Corp C' },
-  // Adicione mais dados conforme necessário
-];
-
 @Component({
   selector: 'app-credenciamento',
   templateUrl: './credenciamento.component.html',
   styleUrls: ['./credenciamento.component.scss'],
 })
-export class CredenciamentoComponent implements AfterViewInit {
+export class CredenciamentoComponent implements AfterViewInit, OnInit {
   modalConfig: ModalConfig = {
     modalTitle: 'Modal title',
     dismissButtonLabel: 'Submit',
@@ -52,7 +41,7 @@ export class CredenciamentoComponent implements AfterViewInit {
 
   // Configurações para a tabela existente
   displayedColumns: string[] = ['id', 'name', 'email'];
-  dataSource = new MatTableDataSource<UserData>(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<UserData>([]);
 
   // Configurações para a nova tabela "Project Spendings"
   spendingColumns: string[] = [
@@ -67,7 +56,7 @@ export class CredenciamentoComponent implements AfterViewInit {
     'corporateName', 
     'details'
   ];
-  spendingDataSource = new MatTableDataSource<ProjectSpending>(SPENDING_DATA);
+  spendingDataSource = new MatTableDataSource<ProjectSpending>([]);
 
   // ViewChild para paginadores e ordenadores de ambas as tabelas
   @ViewChild('modal') modalComponent!: ModalComponent;
@@ -76,7 +65,34 @@ export class CredenciamentoComponent implements AfterViewInit {
   @ViewChild('spendingPaginator') spendingPaginator!: MatPaginator;
   @ViewChild('spendingSort') spendingSort!: MatSort;
 
-  constructor() {}
+  constructor(
+    private credenciamentoService: CredenciamentoService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    // Busca os dados da API ao inicializar o componente
+    this.credenciamentoService.getClientes().subscribe(
+      (data) => {
+        // Mapeia os dados recebidos da API para o formato esperado pela tabela
+        this.spendingDataSource.data = data.map(client => ({
+          manager: client.name, // ou ajuste conforme o necessário
+          date: new Date().toLocaleDateString(), // ou ajuste conforme a data real, se disponível
+          amount: client.monthly_revenue,
+          status: client.registration_status,
+          code: client.id,
+          cnpjCpf: client.document,
+          company: client.name,
+          franchise: 'Franquia', // ajuste conforme a necessidade
+          tradeName: client.trade_name,
+          corporateName: client.name
+        }));
+      },
+      (error) => {
+        console.error('Erro ao carregar os dados da API:', error);
+      }
+    );
+  }
 
   ngAfterViewInit(): void {
     // Configura paginação e ordenação para ambas as tabelas
@@ -110,5 +126,9 @@ export class CredenciamentoComponent implements AfterViewInit {
       console.error('ModalComponent não está disponível');
       return;
     }
+  }
+
+  navigateToAccount() {
+    this.router.navigate(['/crafted/account']);
   }
 }
